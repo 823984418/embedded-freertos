@@ -1,0 +1,22 @@
+[package]
+name = "embedded-freertos"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[build-dependencies]
+cc = "1.2.65"
+build-rs = "0.3.4"
+bindgen = "0.72.1"
+
+[features]
+default = ["heap_4"]
+
+std = []
+
+heap_1 = []
+heap_2 = []
+heap_3 = []
+heap_4 = []
+heap_5 = []
