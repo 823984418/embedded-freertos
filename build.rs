@@ -1,8 +1,9 @@
 #![allow(non_snake_case)]
 
+use std::ffi::OsString;
+
 use bindgen::callbacks::{ItemInfo, ParseCallbacks};
 use regex::Regex;
-use std::ffi::OsString;
 
 const EMBEDDED_FREERTOS_INCLUDE: &str = "EMBEDDED_FREERTOS_INCLUDE";
 
@@ -12,6 +13,7 @@ fn main() {
     let target = build_rs::input::target();
     let out_dir = build_rs::input::out_dir();
     let features = build_rs::input::cargo_cfg_feature();
+    let dummy_stdlib = features.iter().any(|i| i.as_str() == "dummy_stdlib");
 
     let mut portable = features
         .iter()
@@ -26,6 +28,7 @@ fn main() {
     }
     let portable = portable.first();
     let portable = match portable.map(|i| i.as_str()) {
+        Some("portable-MSVC-MingW") => "FreeRTOS-Kernel/portable/MSVC-MingW",
         Some("portable-ARM_CM0") => "FreeRTOS-Kernel/portable/GCC/ARM_CM0",
         Some("portable-ARM_CM3") => "FreeRTOS-Kernel/portable/GCC/ARM_CM3",
         Some("portable-ARM_CM4F") => "FreeRTOS-Kernel/portable/GCC/ARM_CM4F",
@@ -63,7 +66,9 @@ fn main() {
     bindgen = bindgen.allowlist_file(".*FreeRTOS.*");
     bindgen = bindgen.allowlist_file(".*bindgen.*");
 
-    bindgen = bindgen.clang_args(["-isystem", "stdlib"]);
+    if dummy_stdlib {
+        bindgen = bindgen.clang_args(["-isystem", "dummy_stdlib"]);
+    }
     bindgen = bindgen.clang_arg(format!("--target={target}"));
 
     #[derive(Debug, Clone)]
@@ -101,7 +106,9 @@ fn main() {
     cc.pic(false);
     cc.std("c11");
 
-    cc.flags(["-isystem", "stdlib"]);
+    if dummy_stdlib {
+        cc.flags(["-isystem", "dummy_stdlib"]);
+    }
     cc.flag(format!("--target={target}"));
 
     cc.include(include);

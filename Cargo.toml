@@ -14,6 +14,9 @@ regex = "1.12.4"
 [features]
 std = []
 
+dummy_stdlib = []
+
+portable-MSVC-MingW = []
 portable-ARM_CM0 = []
 portable-ARM_CM3 = []
 portable-ARM_CM4F = []
