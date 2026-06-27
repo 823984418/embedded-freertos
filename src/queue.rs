@@ -1,5 +1,6 @@
-use crate::*;
 use core::ffi::c_void;
+
+use crate::*;
 
 pub const queueSEND_TO_BACK: BaseType_t = 0;
 pub const queueSEND_TO_FRONT: BaseType_t = 1;

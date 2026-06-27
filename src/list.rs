@@ -1,7 +1,7 @@
-use crate::*;
-
 use core::ffi::c_void;
 use core::ptr::null_mut;
+
+use crate::*;
 
 pub unsafe fn listSET_LIST_ITEM_OWNER<T>(pxListItem: *mut ListItem_t, pxOwner: *mut T) {
     (*pxListItem).pvOwner = pxOwner as _;

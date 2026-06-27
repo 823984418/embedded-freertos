@@ -5,6 +5,7 @@
 #![allow(non_camel_case_types)]
 #![allow(unexpected_cfgs)]
 #![allow(unpredictable_function_pointer_comparisons)]
+#![allow(unused)]
 
 mod bindgen;
 mod list;
