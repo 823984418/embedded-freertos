@@ -1,9 +1,12 @@
 #include "FreeRTOS.h"
 
+#include "portmacro.h"
+
 #include "croutine.h"
 #include "event_groups.h"
 #include "list.h"
 #include "message_buffer.h"
+#include "portable.h"
 #include "queue.h"
 #include "semphr.h"
 #include "stack_macros.h"
