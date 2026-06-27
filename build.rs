@@ -13,7 +13,7 @@ fn main() {
     let target = build_rs::input::target();
     let out_dir = build_rs::input::out_dir();
     let features = build_rs::input::cargo_cfg_feature();
-    let dummy_stdlib = features.iter().any(|i| i.as_str() == "dummy_stdlib");
+    let dummy_stdlib = build_rs::input::cargo_feature("dummy_stdlib");
 
     let mut portable = features
         .iter()
