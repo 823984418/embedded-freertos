@@ -12,6 +12,7 @@ bindgen = "0.72.1"
 regex = "1.12.4"
 
 [features]
+default = ["std", "dummy_stdlib", "heap_4"]
 std = []
 
 dummy_stdlib = []
