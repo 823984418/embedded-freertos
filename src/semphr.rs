@@ -85,10 +85,41 @@ pub unsafe fn xSemaphoreCreateCounting(
     xQueueCreateCountingSemaphore(uxMaxCount, uxInitialCount)
 }
 
-// TODO: xSemaphoreCreateCountingStatic
-// TODO: vSemaphoreDelete
-// TODO: xSemaphoreGetMutexHolder
-// TODO: xSemaphoreGetMutexHolderFromISR
-// TODO: uxSemaphoreGetCount
-// TODO: uxSemaphoreGetCountFromISR
-// TODO: xSemaphoreGetStaticBuffer
+#[cfg(configSUPPORT_STATIC_ALLOCATION = "1")]
+pub unsafe fn xSemaphoreCreateCountingStatic(
+    uxMaxCount: UBaseType_t,
+    uxInitialCount: UBaseType_t,
+    pxSemaphoreBuffer: *mut StaticSemaphore_t,
+) -> SemaphoreHandle_t {
+    xQueueCreateCountingSemaphoreStatic(uxMaxCount, uxInitialCount, pxSemaphoreBuffer)
+}
+
+pub unsafe fn vSemaphoreDelete(xSemaphore: SemaphoreHandle_t) {
+    vQueueDelete(xSemaphore as QueueHandle_t)
+}
+
+#[cfg(all(configUSE_MUTEXES = "1", INCLUDE_xSemaphoreGetMutexHolder = "1",))]
+pub unsafe fn xSemaphoreGetMutexHolder(xMutex: SemaphoreHandle_t) -> TaskHandle_t {
+    xQueueGetMutexHolder(xMutex)
+}
+
+#[cfg(all(configUSE_MUTEXES = "1", INCLUDE_xSemaphoreGetMutexHolder = "1"))]
+pub unsafe fn xSemaphoreGetMutexHolderFromISR(xMutex: SemaphoreHandle_t) -> TaskHandle_t {
+    xQueueGetMutexHolderFromISR(xMutex)
+}
+
+pub unsafe fn uxSemaphoreGetCount(xSemaphore: SemaphoreHandle_t) -> UBaseType_t {
+    uxQueueMessagesWaiting(xSemaphore)
+}
+
+pub unsafe fn uxSemaphoreGetCountFromISR(xSemaphore: SemaphoreHandle_t) -> UBaseType_t {
+    uxQueueMessagesWaitingFromISR(xSemaphore)
+}
+
+#[cfg(configSUPPORT_STATIC_ALLOCATION = "1")]
+pub unsafe fn xSemaphoreGetStaticBuffer(
+    xSemaphore: SemaphoreHandle_t,
+    ppxSemaphoreBuffer: *mut *mut StaticSemaphore_t,
+) -> BaseType_t {
+    xQueueGenericGetStaticBuffers(xSemaphore, null_mut(), ppxSemaphoreBuffer)
+}

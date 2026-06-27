@@ -86,7 +86,7 @@ fn main() {
     std::fs::write(out_dir.join("bindgen.rs"), &bindgen_rs).unwrap();
 
     let reg = Regex::new(
-        r###"const[ \r\n]+(?P<NAME>config.*)[ \r\n]*:[ \r\n]*.*[ \r\n]*=[ \r\n]*(?P<VALUE>.*)[ \r\n]*;"###,
+        r###"const[ \r\n]+(?P<NAME>(config|INCLUDE).*)[ \r\n]*:[ \r\n]*.*[ \r\n]*=[ \r\n]*(?P<VALUE>.*)[ \r\n]*;"###,
     )
         .unwrap();
     for x in reg.captures_iter(&bindgen_rs) {
