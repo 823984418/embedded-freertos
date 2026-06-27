@@ -2,6 +2,11 @@
 name = "embedded-freertos"
 version = "0.1.0"
 edition = "2024"
+description = "Provide a convenient and easy-to-use FreeRTOS integration for Rust."
+keywords = ["FreeRTOS", "bindgen", "cc", "no_std", "bare-metal"]
+categories = ["embedded", "hardware-support", "no-std"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/823984418/embedded-freertos"
 
 [dependencies]
 
@@ -12,7 +17,7 @@ bindgen = "0.72.1"
 regex = "1.12.4"
 
 [features]
-default = ["std", "dummy_stdlib", "heap_4"]
+default = ["dummy_stdlib", "heap_4"]
 std = []
 
 dummy_stdlib = []
