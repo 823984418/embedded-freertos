@@ -1,4 +1,7 @@
+#![allow(non_snake_case)]
+
 use bindgen::callbacks::{ItemInfo, ParseCallbacks};
+use regex::Regex;
 use std::ffi::OsString;
 
 const EMBEDDED_FREERTOS_INCLUDE: &str = "EMBEDDED_FREERTOS_INCLUDE";
@@ -80,11 +83,18 @@ fn main() {
     bindgen = bindgen.clang_args(["-I", "FreeRTOS-Kernel/include"]);
 
     bindgen = bindgen.header("bindgen.c");
-    bindgen
-        .generate()
-        .unwrap()
-        .write_to_file(out_dir.join("bindgen.rs"))
+    let bindgen_rs = bindgen.generate().unwrap().to_string();
+    std::fs::write(out_dir.join("bindgen.rs"), &bindgen_rs).unwrap();
+
+    let reg = Regex::new(
+        r###"const[ \r\n]+(?P<NAME>config.*)[ \r\n]*:[ \r\n]*.*[ \r\n]*=[ \r\n]*(?P<VALUE>.*)[ \r\n]*;"###,
+    )
         .unwrap();
+    for x in reg.captures_iter(&bindgen_rs) {
+        let name = &x["NAME"];
+        let value = &x["VALUE"];
+        build_rs::output::rustc_cfg_value(name, value);
+    }
 
     let mut cc = cc::Build::new();
     cc.compiler("clang");
@@ -110,7 +120,11 @@ fn main() {
     for i in std::fs::read_dir(portable).unwrap() {
         if let Ok(entry) = i {
             let path = entry.path();
-            if path.is_file() && (path.ends_with(".c") || path.ends_with(".s")) {
+            if path.is_file()
+                && let Some(file_extension) = path.extension()
+                && let Some(file_extension) = file_extension.to_ascii_lowercase().to_str()
+                && matches!(file_extension, "c" | "s")
+            {
                 cc.file(entry.path());
             }
         }

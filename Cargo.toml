@@ -9,10 +9,9 @@ edition = "2024"
 cc = "1.2.65"
 build-rs = "0.3.4"
 bindgen = "0.72.1"
+regex = "1.12.4"
 
 [features]
-default = ["heap_4", "portable-MSVC-MingW"]
-
 std = []
 
 portable-MSVC-MingW = []

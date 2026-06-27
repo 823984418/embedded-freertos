@@ -95,6 +95,7 @@ dependencies = [
  "bindgen",
  "build-rs",
  "cc",
+ "regex",
 ]
 
 [[package]]
