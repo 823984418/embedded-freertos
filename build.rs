@@ -26,7 +26,6 @@ fn main() {
     }
     let portable = portable.first();
     let portable = match portable.map(|i| i.as_str()) {
-        Some("portable-MSVC-MingW") => "FreeRTOS-Kernel/portable/MSVC-MingW",
         Some("portable-ARM_CM0") => "FreeRTOS-Kernel/portable/GCC/ARM_CM0",
         Some("portable-ARM_CM3") => "FreeRTOS-Kernel/portable/GCC/ARM_CM3",
         Some("portable-ARM_CM4F") => "FreeRTOS-Kernel/portable/GCC/ARM_CM4F",

@@ -22,38 +22,6 @@ uint64_t pdTICKS_TO_MS_extern(TickType_t xTimeInTicks) {
     return pdTICKS_TO_MS(xTimeInTicks);
 }
 
-QueueHandle_t xSemaphoreCreateBinary_extern(void) {
-    return xSemaphoreCreateBinary();
-}
-
-QueueHandle_t xSemaphoreCreateBinaryStatic_extern(StaticQueue_t *pxStaticSemaphore) {
-    return xSemaphoreCreateBinaryStatic(pxStaticSemaphore);
-}
-
-BaseType_t xSemaphoreTake_extern(SemaphoreHandle_t xSemaphore, TickType_t xBlockTime) {
-    return xSemaphoreTake(xSemaphore, xBlockTime);
-}
-
-BaseType_t xSemaphoreTakeRecursive_extern(QueueHandle_t xMutex, TickType_t xBlockTime) {
-    return xSemaphoreTakeRecursive(xMutex, xBlockTime);
-}
-
-BaseType_t xSemaphoreGive_extern(SemaphoreHandle_t xSemaphore) {
-    return xSemaphoreGive(xSemaphore);
-}
-
-BaseType_t xSemaphoreGiveRecursive_extern(QueueHandle_t xMutex) {
-    return xSemaphoreGiveRecursive(xMutex);
-}
-
-BaseType_t xSemaphoreGiveFromISR_extern(SemaphoreHandle_t xSemaphore, BaseType_t *pxHigherPriorityTaskWoken) {
-    return xSemaphoreGiveFromISR(xSemaphore, pxHigherPriorityTaskWoken);
-}
-
-BaseType_t xSemaphoreTakeFromISR_extern(SemaphoreHandle_t xSemaphore, BaseType_t *pxHigherPriorityTaskWoken) {
-    return xSemaphoreTakeFromISR(xSemaphore, pxHigherPriorityTaskWoken);
-}
-
 void taskYIELD_extern(void) {
     taskYIELD();
 }
