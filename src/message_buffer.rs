@@ -1,0 +1,20 @@
+
+// TODO: xMessageBufferCreate
+// TODO: xMessageBufferCreateWithCallback
+// TODO: xMessageBufferCreateStatic
+// TODO: xMessageBufferCreateStaticWithCallback
+// TODO: xMessageBufferGetStaticBuffers
+// TODO: xMessageBufferSend
+// TODO: xMessageBufferSendFromISR
+// TODO: xMessageBufferReceive
+// TODO: xMessageBufferReceiveFromISR
+// TODO: vMessageBufferDelete
+// TODO: xMessageBufferIsFull
+// TODO: xMessageBufferIsEmpty
+// TODO: xMessageBufferReset
+// TODO: xMessageBufferResetFromISR
+// TODO: xMessageBufferSpaceAvailable
+// TODO: xMessageBufferSpacesAvailable
+// TODO: xMessageBufferNextLengthBytes
+// TODO: xMessageBufferSendCompletedFromISR
+// TODO: xMessageBufferReceiveCompletedFromISR
