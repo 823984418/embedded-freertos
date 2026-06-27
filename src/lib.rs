@@ -14,6 +14,7 @@ mod queue;
 mod semphr;
 mod stream_buffer;
 mod task;
+mod timers;
 
 pub use bindgen::*;
 pub use list::*;
@@ -22,6 +23,7 @@ pub use queue::*;
 pub use semphr::*;
 pub use stream_buffer::*;
 pub use task::*;
+pub use timers::*;
 
 pub const pdFALSE: BaseType_t = 0;
 pub const pdTRUE: BaseType_t = 1;

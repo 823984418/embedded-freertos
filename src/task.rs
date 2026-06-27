@@ -10,7 +10,7 @@ pub const taskSCHEDULER_NOT_STARTED: BaseType_t = 1;
 pub const taskSCHEDULER_RUNNING: BaseType_t = 2;
 
 pub fn taskVALID_CORE_ID(xCoreID: BaseType_t) -> BaseType_t {
-    if xCoreID >= 0 && xCoreID < 1 {
+    if 0 <= xCoreID && xCoreID < configNUMBER_OF_CORES as BaseType_t {
         pdTRUE
     } else {
         pdFALSE

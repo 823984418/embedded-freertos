@@ -123,13 +123,6 @@ pub unsafe fn xQueueSendFromISR(
     )
 }
 
-// TODO: xQueueCRSendFromISR
-// TODO: xQueueCRReceiveFromISR
-// TODO: xQueueCRSend
-// TODO: xQueueCRReceive
-// TODO: xQueueCreateMutexStatic
-// TODO: xQueueCreateCountingSemaphore
-// TODO: xQueueCreateCountingSemaphoreStatic
-// TODO: xQueueGetMutexHolder
-// TODO: xQueueGetMutexHolderFromISR
-// TODO: xQueueReset
+pub unsafe fn xQueueReset(xQueue: QueueHandle_t) -> BaseType_t {
+    xQueueGenericReset(xQueue, pdFALSE)
+}
