@@ -2,6 +2,10 @@ use core::ptr::null_mut;
 
 use crate::*;
 
+pub const semBINARY_SEMAPHORE_QUEUE_LENGTH: UBaseType_t = 1;
+pub const semSEMAPHORE_QUEUE_ITEM_LENGTH: UBaseType_t = 0;
+pub const semGIVE_BLOCK_TIME: TickType_t = 0;
+
 #[cfg(configSUPPORT_DYNAMIC_ALLOCATION = "1")]
 pub unsafe fn xSemaphoreCreateBinary() -> SemaphoreHandle_t {
     xQueueGenericCreate(

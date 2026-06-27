@@ -1,6 +1,6 @@
 [package]
 name = "embedded-freertos"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "Provide a convenient and easy-to-use FreeRTOS integration for Rust."
 keywords = ["FreeRTOS", "bindgen", "cc", "no_std", "bare-metal"]

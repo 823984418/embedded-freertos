@@ -71,8 +71,8 @@ pub unsafe fn listREMOVE_ITEM(pxItemToRemove: *mut ListItem_t) {
 pub unsafe fn listINSERT_END(pxList: *mut List_t, pxNewListItem: *mut ListItem_t) {
     let pxIndex = (*pxList).pxIndex;
 
-    // FIXME: listTEST_LIST_INTEGRITY(pxList)
-    // FIXME: listTEST_LIST_ITEM_INTEGRITY(pxNewListItem)
+    // listTEST_LIST_INTEGRITY(pxList)
+    // listTEST_LIST_ITEM_INTEGRITY(pxNewListItem)
 
     (*pxNewListItem).pxNext = pxIndex;
     (*pxNewListItem).pxPrevious = (*pxIndex).pxPrevious;

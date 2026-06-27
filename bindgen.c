@@ -49,3 +49,7 @@ void taskDISABLE_INTERRUPTS_extern(void) {
 void taskENABLE_INTERRUPTS_extern(void) {
     taskENABLE_INTERRUPTS();
 }
+
+void taskYIELD_WITHIN_API_extern(void) {
+    taskYIELD_WITHIN_API();
+}

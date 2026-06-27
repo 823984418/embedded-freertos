@@ -38,10 +38,6 @@ pub const pdFAIL: BaseType_t = pdFALSE;
 pub const errQUEUE_EMPTY: BaseType_t = 0;
 pub const errQUEUE_FULL: BaseType_t = 0;
 
-pub const semBINARY_SEMAPHORE_QUEUE_LENGTH: UBaseType_t = 1;
-pub const semSEMAPHORE_QUEUE_ITEM_LENGTH: UBaseType_t = 0;
-pub const semGIVE_BLOCK_TIME: TickType_t = 0;
-
 pub const fn rsMS_TO_TICKS(xTimeInMs: u64) -> TickType_t {
     (xTimeInMs * configTICK_RATE_HZ as u64 / 1000) as TickType_t
 }
