@@ -11,7 +11,7 @@ build-rs = "0.3.4"
 bindgen = "0.72.1"
 
 [features]
-default = ["heap_4"]
+default = ["heap_4", "portable-MSVC-MingW"]
 
 std = []
 

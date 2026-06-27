@@ -1,8 +1,11 @@
+use bindgen::callbacks::{ItemInfo, ParseCallbacks};
 use std::ffi::OsString;
 
 const EMBEDDED_FREERTOS_INCLUDE: &str = "EMBEDDED_FREERTOS_INCLUDE";
 
 fn main() {
+    build_rs::output::rerun_if_changed("bindgen.c");
+
     let target = build_rs::input::target();
     let out_dir = build_rs::input::out_dir();
     let features = build_rs::input::cargo_cfg_feature();
@@ -55,17 +58,28 @@ fn main() {
     bindgen = bindgen.derive_partialeq(true);
     bindgen = bindgen.merge_extern_blocks(true);
     bindgen = bindgen.prepend_enum_name(false);
-    bindgen = bindgen.blocklist_function(".*");
     bindgen = bindgen.allowlist_file(".*FreeRTOS.*");
+    bindgen = bindgen.allowlist_file(".*bindgen.*");
 
     bindgen = bindgen.clang_args(["-isystem", "stdlib"]);
     bindgen = bindgen.clang_arg(format!("--target={target}"));
+
+    #[derive(Debug, Clone)]
+    struct Callbacks;
+
+    impl ParseCallbacks for Callbacks {
+        fn generated_name_override(&self, item_info: ItemInfo<'_>) -> Option<String> {
+            Some(item_info.name.trim_end_matches("_extern").to_string())
+        }
+    }
+
+    bindgen = bindgen.parse_callbacks(Box::new(Callbacks));
 
     bindgen = bindgen.clang_args(["-I", &include.to_string_lossy()]);
     bindgen = bindgen.clang_args(["-I", portable]);
     bindgen = bindgen.clang_args(["-I", "FreeRTOS-Kernel/include"]);
 
-    bindgen = bindgen.header("FreeRTOS-Kernel/include/FreeRTOS.h");
+    bindgen = bindgen.header("bindgen.c");
     bindgen
         .generate()
         .unwrap()
@@ -105,6 +119,8 @@ fn main() {
     if let Some(heap) = heap {
         cc.file(heap);
     }
+
+    cc.file("bindgen.c");
 
     cc.compile("embedded-freertos");
 }
