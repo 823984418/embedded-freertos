@@ -9,6 +9,7 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/823984418/embedded-freertos"
 
 [dependencies]
+critical-section = { version = "1.2.0", features = ["restore-state-none"], optional = true }
 
 [build-dependencies]
 cc = "1.2.65"
@@ -22,6 +23,8 @@ std = []
 
 dummy_stdlib = []
 
+critical-section = ["dep:critical-section"]
+
 portable-MSVC-MingW = []
 portable-ARM_CM0 = []
 portable-ARM_CM3 = []
@@ -33,6 +36,6 @@ heap_3 = []
 heap_4 = []
 heap_5 = []
 
-heap_alloc = []
+heap_rust = []
 
 [lints.rust]

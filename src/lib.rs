@@ -19,8 +19,11 @@ mod stream_buffer;
 mod task;
 mod timers;
 
-#[cfg(feature = "heap_alloc")]
-mod heap_alloc;
+#[cfg(feature = "heap_rust")]
+mod heap_rust;
+
+#[cfg(feature = "critical-section")]
+pub mod critical_section;
 
 pub use bindgen::*;
 pub use list::*;

@@ -1,6 +1,7 @@
 #![allow(non_snake_case)]
 
 use std::ffi::OsString;
+use std::path::PathBuf;
 
 use bindgen::callbacks::{ItemInfo, ParseCallbacks};
 use regex::Regex;
@@ -136,7 +137,9 @@ fn main() {
         }
     }
 
-    if let Some(heap) = heap {
+    if let Some(heap) = heap
+        && PathBuf::from(&heap).is_file()
+    {
         cc.file(heap);
     }
 
