@@ -7,6 +7,9 @@
 #![allow(unpredictable_function_pointer_comparisons)]
 #![allow(unused)]
 
+extern crate alloc;
+extern crate core;
+
 mod bindgen;
 mod list;
 mod message_buffer;
@@ -15,6 +18,9 @@ mod semphr;
 mod stream_buffer;
 mod task;
 mod timers;
+
+#[cfg(feature = "heap_alloc")]
+mod heap_alloc;
 
 pub use bindgen::*;
 pub use list::*;

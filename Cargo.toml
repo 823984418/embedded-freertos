@@ -33,4 +33,6 @@ heap_3 = []
 heap_4 = []
 heap_5 = []
 
+heap_alloc = []
+
 [lints.rust]
